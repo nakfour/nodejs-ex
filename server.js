@@ -92,6 +92,10 @@ app.get('/pagecount', function (req, res) {
   }
 });
 
+app.get('/tweets', function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for all origins!'})
+})
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
