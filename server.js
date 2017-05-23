@@ -4,6 +4,7 @@ var express = require('express'),
     app     = express(),
     eps     = require('ejs'),
     morgan  = require('morgan');
+    twitter = require('./twitter.js')
     
 Object.assign=require('object-assign')
 
@@ -93,7 +94,8 @@ app.get('/pagecount', function (req, res) {
 });
 
 app.get('/tweets', function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
+  var dataFromTwitter= twitter.getTweets()
+  res.json({msg: dataFromTwitter})
 })
 
 // error handling
