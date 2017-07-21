@@ -16,7 +16,7 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
 
-if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
+/*if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
       mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
       mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
@@ -34,11 +34,11 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
     mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
 
   }
-}
+}*/
 var db = null,
     dbDetails = new Object();
 
-var initDb = function(callback) {
+/*var initDb = function(callback) {
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
@@ -57,9 +57,9 @@ var initDb = function(callback) {
 
     console.log('Connected to MongoDB at: %s', mongoURL);
   });
-};
+};*/
 
-app.get('/', function (req, res) {
+/*app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
   console.log("Getting a / route request");
@@ -76,9 +76,9 @@ app.get('/', function (req, res) {
   } else {
     res.render('index.html', { pageCountMessage : null});
   }
-});
+});*/
 
-app.get('/pagecount', function (req, res) {
+/*app.get('/pagecount', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
   if (!db) {
@@ -91,11 +91,23 @@ app.get('/pagecount', function (req, res) {
   } else {
     res.send('{ pageCount: -1 }');
   }
-});
+});*/
 
-app.get('/tweets', function (req, res, next) {
+
+//// GET ALL TWEETS
+/*app.get('/tweets', function (req, res, next) {
   var dataFromTwitter= twitter.getTweets()
   res.json({msg: dataFromTwitter})
+})*/
+
+//POST mobile sensor data
+app.post('/sensordata', function (req, res, next) {
+  res.json({msg: "Success"})
+})
+
+//GET mobile sensor data
+app.get('/sensordata', function (req, res, next) {
+  res.json({msg: "No Data"})
 })
 
 // error handling
@@ -104,9 +116,9 @@ app.use(function(err, req, res, next){
   res.status(500).send('Something bad happened!');
 });
 
-initDb(function(err){
+/*initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
-});
+});*/
 
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
