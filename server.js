@@ -103,11 +103,13 @@ var db = null,
 //POST mobile sensor data
 app.post('/sensordata', function (req, res, next) {
   res.json({msg: "Success"})
+
 })
 
 //GET mobile sensor data
 app.get('/sensordata', function (req, res, next) {
-  res.json({msg: "No Data"})
+  //res.json({msg: "No Data"})
+  res.status(200).send('Empty Data');
 })
 
 // error handling
