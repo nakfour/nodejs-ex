@@ -110,17 +110,31 @@ var initDb = function(callback) {
   res.json({msg: dataFromTwitter})
 })*/
 
+
+
 //POST mobile sensor data
-app.post('/sensordata', function (req, res, next) {
-  res.json({msg: "Success"})
+app.post('/membership', function (req, res, next) {
+  res.status(200).send('Success');
+
+})
+
+//POST mobile sensor data
+app.post('/startrental', function (req, res, next) {
+  res.status(200).send('Success');
+
+})
+
+//POST mobile sensor data
+app.post('/stoprental', function (req, res, next) {
+  res.status(200).send('Success');
 
 })
 
 //GET mobile sensor data
-app.get('/sensordata', function (req, res, next) {
+/*app.get('/sensordata', function (req, res, next) {
   //res.json({msg: "No Data"})
   res.status(200).send('Empty Data');
-})
+})*/
 
 // error handling
 app.use(function(err, req, res, next){
