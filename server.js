@@ -56,7 +56,7 @@ var initDb = function(callback) {
   mongodb.connect(mongoURL, function(err, conn) {
     if (err) {
       console.log("mongo connection error");
-      callback(err);
+      //callback(err);
       return;
     }
 
@@ -131,7 +131,7 @@ app.use(function(err, req, res, next){
 /*initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });*/
-
+initDb();
 app.listen(port, ip);
 console.log("Server Ready");
 console.log('Server running on http://%s:%s', ip, port);
