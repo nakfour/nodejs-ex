@@ -39,13 +39,14 @@ var db = null,
     dbDetails = new Object();
 
 var initDb = function(callback) {
+// JUANA TODO USE ENV
+  mongoURL='mongodb://admin:admin@mongodb/sampledb';
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
   if (mongodb == null) return;
 
-// JUANA TODO USE ENV
-  mongoURL='mongodb://admin:admin@mongodb/sampledb';
+
   mongodb.connect(mongoURL, function(err, conn) {
     if (err) {
       callback(err);
