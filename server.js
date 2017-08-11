@@ -130,6 +130,12 @@ app.post('/stoprental', function (req, res, next) {
 
 })
 
+app.get('/membership', function (req, res, next) {
+  //res.json({msg: "No Data"})
+  res.status(200).send('Empty Data');
+})
+
+
 //GET mobile sensor data
 /*app.get('/sensordata', function (req, res, next) {
   //res.json({msg: "No Data"})
