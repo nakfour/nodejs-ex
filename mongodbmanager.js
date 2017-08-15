@@ -3,6 +3,7 @@
 /******************************************************************************************/
 
 var db = null,
+    mongoURLLabel = "",
     dbDetails = new Object();
 
 var initDb = function(callback) {
