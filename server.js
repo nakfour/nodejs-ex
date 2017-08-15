@@ -117,10 +117,16 @@ app.use(function(err, req, res, next){
   res.status(500).send('Something bad happened!');
 });
 
-/* Testing DB */
-dbManager.createMembership(function(err) {
-    console.log("err:" + err);
-})
+dbManager.initDb(function(err) {
+    if(err!=null) {
+        console.log(err);
+    } else
+    {
+        dbManager.createMembership (function(err) {
+          console.log(err);
+        });
+    }
+});
 app.listen(port, ip);
 console.log("Server Ready");
 console.log('Server running on http://%s:%s', ip, port);
