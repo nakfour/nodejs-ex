@@ -3,8 +3,9 @@ var express = require('express'),
     fs      = require('fs'),
     app     = express(),
     eps     = require('ejs'),
+    dbManager = require ('./mongodbmanager')
     morgan  = require('morgan');
-    twitter = require('./twitter.js')
+   //twitter = require('./twitter.js')
     
 Object.assign=require('object-assign')
 
@@ -35,39 +36,7 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
 
   }
 }*/
-var db = null,
-    dbDetails = new Object();
 
-var initDb = function(callback) {
-// JUANA TODO USE ENV
-  mongoURL='mongodb://admin:admin@mongodb/sampledb';
-  if (mongoURL == null) {
-    console.log("mongoURL null");
-    return;
-  }
-
-  var mongodb = require('mongodb');
-  if (mongodb == null) {
-    console.log("mongodb null");
-    return;
-  }
-
-
-  mongodb.connect(mongoURL, function(err, conn) {
-    if (err) {
-      console.log("mongo connection error");
-      //callback(err);
-      return;
-    }
-
-    db = conn;
-    dbDetails.databaseName = db.databaseName;
-    dbDetails.url = mongoURLLabel;
-    dbDetails.type = 'MongoDB';
-
-    console.log('Connected to MongoDB at: %s', mongoURL);
-  });
-};
 
 /*app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
@@ -148,10 +117,10 @@ app.use(function(err, req, res, next){
   res.status(500).send('Something bad happened!');
 });
 
-/*initDb(function(err){
-  console.log('Error connecting to Mongo. Message:\n'+err);
-});*/
-initDb();
+/* Testing DB */
+dbManager.createMembership(function(err) {
+    console.log("err:" + err);
+})
 app.listen(port, ip);
 console.log("Server Ready");
 console.log('Server running on http://%s:%s', ip, port);
