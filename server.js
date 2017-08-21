@@ -103,7 +103,6 @@ dbManager.initDb(function(err) {
 //POST mobile sensor data
 app.post('/membership', function (req, res, next) {
   console.log("Received post membership with data: ");
-  console.log(req.body.firstname);
   dbManager.createMembership(req.body,function(err) {
     if(err) {
         res.status(400).send('Bad Data');
@@ -118,13 +117,28 @@ app.post('/membership', function (req, res, next) {
 
 //POST mobile sensor data
 app.post('/startrental', function (req, res, next) {
-  res.status(200).send('Success');
-
+  console.log("Received post startrental: ");
+  dbManager.createRental(req.body,function(err) {
+    if(err) {
+        res.status(400).send('Bad Data');
+    }
+    else {
+        res.status(200).send('Success');
+    }
+  });
 })
 
 //POST mobile sensor data
 app.post('/stoprental', function (req, res, next) {
-  res.status(200).send('Success');
+  console.log("Received post stoprental with data: ");
+  dbManager.updateRental(req.body,function(err) {
+    if(err) {
+        res.status(400).send('Bad Data');
+    }
+    else {
+        res.status(200).send('Success');
+    }
+  });
 
 })
 

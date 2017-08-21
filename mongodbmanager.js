@@ -83,7 +83,6 @@ module.exports =  {
         console.log("createMembership");
         console.log("db: " + db);
         if(db!=null) {
-            //var membershipObject = JSON.parse(data);
             db.collection('bikerentalmembership').insertOne(
             {
                   "firstname" : membershipObject.firstname,
@@ -95,19 +94,58 @@ module.exports =  {
                 console.log("Inserted a document into the bikerentalmembership collection.");
                 callback(null);
               });
-              db.close();
+             db.close();
         } else
             callback("Connection to database error");
     },
 
-    createRental: function() {
+    createRental: function(rentalObject,callback) {
         console.log("createRental");
-        return;
+        console.log("db: " + db);
+        if(db!=null) {
+              db.collection('bikerental').insertOne(
+              {
+                     "bikeid" : rentalObject.bikeid,
+                     "usertype" : rentalObject.usertype,
+                     "gender" : rentalObject.gender,
+                     "birthyear" : rentalObject.birthyear,
+                     "starttime" : rentalObject.starttime,
+                     "startstationid" : rentalObject.startstationid,
+                     "startstationname" : rentalObject.startstationname,
+                     "startstationlat" : rentalObject.startstationlat,
+                     "startstationlon" : rentalObject.startstationlon
+
+               }, function(err, result) {
+                       assert.equal(err, null);
+                       console.log("Inserted a document into the bikerental collection.");
+                       callback(null);
+               });
+               db.close();
+        } else
+           callback("Connection to database error");
     },
 
-    updateRental: function() {
+    updateRental: function(rentalObject,callback) {
         console.log("updateRental");
-        return;
+        if(db!=null) {
+                var myquery = { bikeid: rentalObject.bikeid };
+                var newvalues = { $set: { "endtime" : rentalObject.endtime,
+                                          "endstationid" : rentalObject.endstationid,
+                                          "endstationname" : rentalObject.endstationname,
+                                          "endstationlat" : rentalObject.endstationlat,
+                                          "endstationlon" : rentalObject.endstationlon }
+                                 };
+                db.collection("bikerental").updateOne(myquery, newvalues,
+                function(err, result) {
+                    assert.equal(err, null);
+                    console.log("Updated document in the bikerental collection.");
+                    console.log(result);
+                    callback(null);
+                });
+                db.close();
+          } else
+             callback("Connection to database error");
+
     },
 
     readAllRental: function() {
