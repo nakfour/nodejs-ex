@@ -1,5 +1,6 @@
 //  OpenShift sample Node application
 var express = require('express'),
+    bodyParser = require('body-parser'),
     fs      = require('fs'),
     cors = require('cors')
     app     = express(),
@@ -13,6 +14,7 @@ Object.assign=require('object-assign')
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
 app.use(cors());
+app.use(bodyParser.json());
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
@@ -101,7 +103,7 @@ dbManager.initDb(function(err) {
 //POST mobile sensor data
 app.post('/membership', function (req, res, next) {
   console.log("Received post membership with data: ");
-  console.log(req.body);
+  console.log(req.body.firstname);
   dbManager.createMembership(req.body,function(err) {
     if(err) {
         res.status(400).send('Bad Data');

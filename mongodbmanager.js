@@ -79,11 +79,11 @@ module.exports =  {
       });
 
     },
-    createMembership:function(data,callback) {
+    createMembership:function(membershipObject,callback) {
         console.log("createMembership");
         console.log("db: " + db);
         if(db!=null) {
-            var membershipObject = JSON.parse(data);
+            //var membershipObject = JSON.parse(data);
             db.collection('bikerentalmembership').insertOne(
             {
                   "firstname" : membershipObject.firstname,
