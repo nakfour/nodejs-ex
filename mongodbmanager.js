@@ -79,6 +79,10 @@ module.exports =  {
       });
 
     },
+    closeDb:function() {
+        console.log("Closing Database");
+        db.close();
+    },
     createMembership:function(membershipObject,callback) {
         console.log("createMembership");
         console.log("db: " + db);
@@ -92,7 +96,7 @@ module.exports =  {
             }, function(err, result) {
                 assert.equal(err, null);
                 console.log("Inserted a document into the bikerentalmembership collection.");
-                db.close();
+                //db.close();
                 callback(null);
               });
 
@@ -119,7 +123,7 @@ module.exports =  {
                }, function(err, result) {
                        assert.equal(err, null);
                        console.log("Inserted a document into the bikerental collection.");
-                       db.close();
+                      // db.close();
                        callback(null);
                });
 

@@ -165,4 +165,13 @@ app.listen(port, ip);
 console.log("Server Ready");
 console.log('Server running on http://%s:%s', ip, port);
 
+function shutdown () {
+    console.log( "Closing Database.");
+    dbManager.closeDB();
+    process.exit();
+}
+
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
+
 module.exports = app ;
