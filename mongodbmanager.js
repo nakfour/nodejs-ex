@@ -141,8 +141,8 @@ module.exports =  {
                 function(err, result) {
                     assert.equal(err, null);
                     console.log("Updated document in the bikerental collection.");
-                    console.log(result);
-                    db.close();
+                    //console.log(result);
+                    //db.close();
                     callback(null);
                 });
 
