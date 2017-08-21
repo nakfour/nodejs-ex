@@ -92,9 +92,10 @@ module.exports =  {
             }, function(err, result) {
                 assert.equal(err, null);
                 console.log("Inserted a document into the bikerentalmembership collection.");
+                db.close();
                 callback(null);
               });
-             db.close();
+
         } else
             callback("Connection to database error");
     },
@@ -118,9 +119,10 @@ module.exports =  {
                }, function(err, result) {
                        assert.equal(err, null);
                        console.log("Inserted a document into the bikerental collection.");
+                       db.close();
                        callback(null);
                });
-               db.close();
+
         } else
            callback("Connection to database error");
     },
@@ -140,9 +142,10 @@ module.exports =  {
                     assert.equal(err, null);
                     console.log("Updated document in the bikerental collection.");
                     console.log(result);
+                    db.close();
                     callback(null);
                 });
-                db.close();
+
           } else
              callback("Connection to database error");
 
