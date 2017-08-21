@@ -79,16 +79,17 @@ module.exports =  {
       });
 
     },
-    createMembership:function(callback) {
+    createMembership:function(data,callback) {
         console.log("createMembership");
         console.log("db: " + db);
         if(db!=null) {
+            var membershipObject = JSON.parse(data);
             db.collection('bikerentalmembership').insertOne(
             {
-                  "firstname" : "testfirstname",
-                  "lastname" : "testlsatname",
-                  "gender" : "0",
-                  "birthyear" : "1988"
+                  "firstname" : membershipObject.firstname,
+                  "lastname" : membershipObject.lasttname,
+                  "gender" : membershipObject.gender,
+                  "birthyear" : membershipObject.birthyear
             }, function(err, result) {
                 assert.equal(err, null);
                 console.log("Inserted a document into the bikerentalmembership collection.");

@@ -1,6 +1,7 @@
 //  OpenShift sample Node application
 var express = require('express'),
     fs      = require('fs'),
+    cors = require('cors')
     app     = express(),
     eps     = require('ejs'),
     dbManager = require ('./mongodbmanager')
@@ -10,7 +11,8 @@ var express = require('express'),
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
-app.use(morgan('combined'))
+app.use(morgan('combined'));
+app.use(cors());
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
@@ -37,7 +39,16 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
   }
 }*/
 
-
+dbManager.initDb(function(err) {
+    if(err!=null) {
+        console.log(err);
+    } else
+    {
+        dbManager.createMembership (function(err) {
+          console.log(err);
+        });
+    }
+});
 /*app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
@@ -79,11 +90,26 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
   res.json({msg: dataFromTwitter})
 })*/
 
-
+// Enable CORS
+/*app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});*/
 
 //POST mobile sensor data
 app.post('/membership', function (req, res, next) {
-  res.status(200).send('Success');
+  console.log("Received post membership with data: ");
+  console.log(req.body);
+  dbManager.createMembership(req.body,function(err) {
+    if(err) {
+        res.status(400).send('Bad Data');
+    }
+    else {
+        res.status(200).send('Success');
+    }
+  });
+
 
 })
 
@@ -117,16 +143,7 @@ app.use(function(err, req, res, next){
   res.status(500).send('Something bad happened!');
 });
 
-dbManager.initDb(function(err) {
-    if(err!=null) {
-        console.log(err);
-    } else
-    {
-        dbManager.createMembership (function(err) {
-          console.log(err);
-        });
-    }
-});
+
 app.listen(port, ip);
 console.log("Server Ready");
 console.log('Server running on http://%s:%s', ip, port);
