@@ -44,9 +44,10 @@ dbManager.initDb(function(err) {
         console.log(err);
     } else
     {
-        dbManager.createMembership (function(err) {
+        /*dbManager.createMembership (function(err) {
           console.log(err);
-        });
+        });*/
+        console.log("Database Inialization Success");
     }
 });
 /*app.get('/', function (req, res) {
