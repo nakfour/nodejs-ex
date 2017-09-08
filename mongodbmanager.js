@@ -118,7 +118,8 @@ module.exports =  {
                      "startstationid" : rentalObject.startstationid,
                      "startstationname" : rentalObject.startstationname,
                      "startstationlat" : rentalObject.startstationlat,
-                     "startstationlon" : rentalObject.startstationlon
+                     "startstationlon" : rentalObject.startstationlon,
+                     "mobileos" : rentalObject.mobileos
 
                }, function(err, result) {
                        assert.equal(err, null);
