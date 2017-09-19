@@ -111,15 +111,15 @@ module.exports =  {
         if(db!=null) {
               db.collection('bikerental').insertOne(
               {
-                     "bikeid" : rentalObject.bikeid,
+                     "bikeid" : parseInt(rentalObject.bikeid),
                      "usertype" : rentalObject.usertype,
-                     "gender" : rentalObject.gender,
+                     "gender" : parseInt(rentalObject.gender),
                      "birthyear" : rentalObject.birthyear,
                      "starttime" : rentalObject.starttime,
-                     "startstationid" : rentalObject.startstationid,
+                     "startstationid" : parseInt(rentalObject.startstationid),
                      "startstationname" : rentalObject.startstationname,
-                     "startstationlat" : rentalObject.startstationlat,
-                     "startstationlon" : rentalObject.startstationlon,
+                     "startstationlat" : parseInt(rentalObject.startstationlat),
+                     "startstationlon" : parseInt(rentalObject.startstationlon),
                      "mobileos" : rentalObject.mobileos
 
                }, function(err, result) {
