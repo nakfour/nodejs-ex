@@ -118,8 +118,8 @@ module.exports =  {
                      "starttime" : rentalObject.starttime,
                      "startstationid" : parseInt(rentalObject.startstationid),
                      "startstationname" : rentalObject.startstationname,
-                     "startstationlat" : parseInt(rentalObject.startstationlat),
-                     "startstationlon" : parseInt(rentalObject.startstationlon),
+                     "startstationlat" : parseFloat(rentalObject.startstationlat),
+                     "startstationlon" : parseFloat(rentalObject.startstationlon),
                      "mobileos" : rentalObject.mobileos
 
                }, function(err, result) {
@@ -138,10 +138,10 @@ module.exports =  {
         if(db!=null) {
                 var myquery = { bikeid: rentalObject.bikeid };
                 var newvalues = { $set: { "endtime" : rentalObject.endtime,
-                                          "endstationid" : rentalObject.endstationid,
+                                          "endstationid" : parseInt(rentalObject.endstationid),
                                           "endstationname" : rentalObject.endstationname,
-                                          "endstationlat" : rentalObject.endstationlat,
-                                          "endstationlon" : rentalObject.endstationlon }
+                                          "endstationlat" : parseFloat(rentalObject.endstationlat),
+                                          "endstationlon" : parseFloat(rentalObject.endstationlon) }
                                  };
                 db.collection("bikerental").updateOne(myquery, newvalues,
                 function(err, result) {
