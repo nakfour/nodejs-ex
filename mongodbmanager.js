@@ -106,6 +106,7 @@ module.exports =  {
 
     createRental: function(rentalObject,callback) {
         console.log("createRental");
+        console.log(rentalObject)
         console.log("db: " + db);
         if(db!=null) {
               db.collection('bikerental').insertOne(
