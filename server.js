@@ -142,6 +142,22 @@ app.post('/stoprental', function (req, res, next) {
 
 })
 
+//POST mobile sensor data
+app.post('/touch', function (req, res, next) {
+  console.log("Received post for touch data: ");
+  dbManager.createTouch(req.body,function(err) {
+    if(err) {
+        res.status(400).send('Bad Data');
+    }
+    else {
+        res.status(200).send('Success');
+    }
+  });
+
+})
+
+
+
 app.get('/membership', function (req, res, next) {
   //res.json({msg: "No Data"})
   res.status(200).send('Empty Data');

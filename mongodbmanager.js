@@ -135,6 +135,7 @@ module.exports =  {
 
     updateRental: function(rentalObject,callback) {
         console.log("updateRental");
+        console.log(rentalObject)
         if(db!=null) {
                 var myquery = { bikeid: rentalObject.bikeid };
                 var newvalues = { $set: { "endtime" : rentalObject.endtime,
@@ -156,6 +157,25 @@ module.exports =  {
              callback("Connection to database error");
 
     },
+
+    createTouch: function(touchObject,callback) {
+            console.log("createTouch");
+            console.log(touchObject)
+            if(db!=null) {
+                    db.collection('touchdata').insertOne(
+                    {
+                        "x" : parseInt(touchObject.x),
+                        "y" : parseInt(touchObject.y)
+                    }, function(err, result) {
+                         assert.equal(err, null);
+                         console.log("Inserted a document into the touchdata collection.");
+                         callback(null);
+                    });
+
+              } else
+                 callback("Connection to database error");
+
+        },
 
     readAllRental: function() {
         console.log("readAllRental");
