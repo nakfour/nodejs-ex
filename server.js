@@ -156,6 +156,20 @@ app.post('/touch', function (req, res, next) {
 
 })
 
+//GET request for deleting all touch data
+app.get('/touchdeleteall', function (req, res, next) {
+  console.log("Received Get for deleting all Touch data ");
+  dbManager.deleteAllTouch(function(err) {
+    if(err) {
+        res.status(400).send('Bad Data');
+    }
+    else {
+        res.status(200).send('Success');
+    }
+  });
+
+})
+
 
 
 app.get('/membership', function (req, res, next) {

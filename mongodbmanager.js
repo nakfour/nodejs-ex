@@ -177,6 +177,23 @@ module.exports =  {
 
         },
 
+    deleteAllTouch: function(callback) {
+            console.log("deleteAllTouch");
+            if(db!=null) {
+                   db.collection('touchdata').remove({},
+                   function(err,removedNum){
+                       if (err) {
+                        console.log("Error deleting touch data: " + err);
+                       }
+                       else {
+                        console.log("Number of Touch docs removed: " + removedNum);
+                       }
+                       callback(null);
+                   });
+            } else
+                   callback("Connection to database error");
+    },
+
     readAllRental: function() {
         console.log("readAllRental");
         return;
