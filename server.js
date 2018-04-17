@@ -157,14 +157,15 @@ app.post('/touch', function (req, res, next) {
 })
 
 //GET request for deleting all touch data
+// Response is json string as expected by web portal
 app.get('/touchdeleteall', function (req, res, next) {
   console.log("Received Get for deleting all Touch data ");
   dbManager.deleteAllTouch(function(err) {
     if(err) {
-        res.status(400).send('Bad Data');
+        res.status(400).send(JSON.stringify({ error: 'Bad Data' }));
     }
     else {
-        res.status(200).send('Success');
+        res.status(200).send(JSON.stringify({ response: 'success' }));
     }
   });
 
